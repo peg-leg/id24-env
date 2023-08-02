@@ -1,0 +1,11 @@
+SITE_HOST: 'inddex24-2204.projectbalance.com'
+
+special_sites: []
+fake_ssl_cert: True
+# when fake_ssl_cert is False, this parameter set soft links to the Letsencyrpt generated certificates
+# and updates the nginx configuration.
+letsencrypt_cchq_ssl: True
+nginx_ssl_protocols: "TLSv1.2"
+nginx_ssl_ciphers: 'ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA384'
+#nginx_combined_cert_value: "{{ ssl_secrets.certs.my_site }}"
+#nginx_key_value: "{{ ssl_secrets.private_keys.my_site }}"

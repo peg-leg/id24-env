@@ -1,0 +1,153 @@
+formplayer_java_version: /usr/lib/jvm/java-17-openjdk-amd64/bin/java
+zookeeper_version: 3.7.1
+zookeeper_download_sha1: sha1:4ce41c6443adb29c92cd28dd76ab5ec00cfed5f0
+couchdb_version: 3.3.1
+haproxy_version: 2.4
+kafka_version: 3.2.3
+kafka_scala_version: 2.13
+kafka_download_sha512: sha512:09ec7a39d0e11494ede7d92cf7dfec5b95c6b0218e3b096b731d85ee8c442469e66aaf369a9c6750399719e515ee1bd372d609d6b232e3358e18aa2b57c90e29
+kafka_inter_broker_protocol_version: 2.6
+kafka_log_message_format_version: 2.6
+
+elasticsearch_endpoint: '{{ groups.elasticsearch.0 }}'
+elasticsearch_memory: '2048m'
+elasticsearch_cluster_name: 'monolith-es'
+elasticsearch_version: 2.4.6
+elasticsearch_download_sha256: 5f7e4bb792917bb7ffc2a5f612dfec87416d54563f795d6a70637befef4cfc6f.
+
+backup_blobdb: True
+blobdb_backup_dir: /opt/data/backups/blobdb
+blobdb_backup_days: 7
+blobdb_backup_weeks: 4
+
+backup_postgres: 'plain'
+postgresql_backup_dir: /opt/data/backups/postgresql
+postgresql_backup_days: 7
+postgresql_backup_weeks: 4
+
+backup_couch: True
+couch_backup_dir: /opt/data/backups/couchdb2
+couchdb_backup_days: 7
+couchdb_backup_weeks: 4
+
+postgres_s3: False
+blobdb_s3: False
+couch_s3: False
+backup_es_s3: False
+
+couchdb2:
+  username: "{{ localsettings_private.COUCH_USERNAME }}"
+  password: "{{ localsettings_private.COUCH_PASSWORD }}"
+
+couchdb_cluster_settings:
+  q: 8
+  r: 1
+  w: 1
+  n: 1
+
+couchdb_use_haproxy: True
+couch_dbs:
+  default:
+    host: 127.0.0.1
+    port: 35984
+    name: commcarehq
+    username: "{{ localsettings_private.COUCH_USERNAME }}"
+    password: "{{ localsettings_private.COUCH_PASSWORD }}"
+    is_https: False
+
+# See the complete list of email addresses in commcare-cloud:
+# src/commcare_cloud/ansible/group_vars/all.yml
+# https://github.com/dimagi/commcare-cloud/blob/master/src/commcare_cloud/ansible/group_vars/all.yml
+root_email: root@inddex24.org
+server_email: commcare@inddex24.org
+server_admin_email: erobinson@projectbalance.com
+default_from_email: commcare@inddex24.org
+privacy_email: erobinson@projectbalance.com
+feedback_email: erobinson@projectbalance.com
+contact_email: erobinson@projectbalance.com
+
+return_path_email: erobinson@projectbalance.com
+support_email: erobinson@projectbalance.com
+probono_support_email: erobinson@projectbalance.com
+accounts_email: erobinson@projectbalance.com
+data_email: erobinson@projectbalance.com
+subscription_change_email: erobinson@projectbalance.com
+internal_subscription_change_email: erobinson@projectbalance.com
+billing_email: erobinson@projectbalance.com
+invoicing_contact_email: erobinson@projectbalance.com
+saas_ops_email: erobinson@projectbalance.com
+growth_email: erobinson@projectbalance.com
+master_list_email: erobinson@projectbalance.com
+sales_email: erobinson@projectbalance.com
+eula_change_email: erobinson@projectbalance.com
+soft_assert_email: erobinson@projectbalance.com
+daily_deploy_email: erobinson@projectbalance.com
+
+BROKER_URL: 'redis://localhost:6379/0'
+
+KSPLICE_ACTIVE: no
+
+DATADOG_ENABLED: false
+
+nameservers: []
+internal_domain_name: 'inddex24-2204.projectbalance.com'
+
+filebeat_inputs:
+  - path: "{{ log_home }}/{{ deploy_env }}_commcare-nginx_error.log"
+    tags:  nginx-error
+  - path: "{{ log_home }}/{{ deploy_env }}-timing.log"
+    tags: nginx-timing
+
+TWO_FACTOR_GATEWAY_ENABLED: False
+
+localsettings:
+  ALLOWED_HOSTS:
+    - 'localhost'
+    - 'inddex24-2204.projectbalance.com'
+  BANK_ADDRESS: ~
+  BANK_NAME: ~
+  BANK_SWIFT_CODE: ~
+  CLOUDCARE_BASE_URL: http://localhost:9010
+  COUCH_CACHE_DOCS: True
+  COUCH_CACHE_VIEWS: True
+  COUCH_HTTPS: False
+  COUCH_PASSWORD: "{{ localsettings_private.COUCH_PASSWORD }}"
+  COUCH_SERVER_ROOT: "127.0.0.1"
+  COUCH_USERNAME: "{{ localsettings_private.COUCH_USERNAME }}"
+  COUCH_STALE_QUERY: 'update_after'
+  DEPLOY_MACHINE_NAME: "{{ ansible_hostname }}"
+  ELASTICSEARCH_MAJOR_VERSION: 2
+  EMAIL_SMTP_HOST: 'smtp.socketlabs.com'
+  EMAIL_SMTP_PORT: 587
+  EMAIL_USE_TLS: yes
+  ENABLE_SOFT_ASSERT_EMAILS: False
+  IS_DIMAGI_ENVIRONMENT: False
+  HQ_INSTANCE: monolith
+  HUBSPOT_API_ID:
+  HUBSPOT_API_KEY:
+  INVOICE_FROM_ADDRESS:
+    'name': "Inddex24"
+    'first_line': ""
+    'city': "Medford"
+    'region': "MA"
+    'postal_code': "02155"
+    'country': "US"
+    'phone_number': "(617) 628-5000"
+    'email': "erobinson@projectbalance.com"
+    'website': "https://www.fhisolutions.org/"
+  INVOICE_PREFIX: INC-
+  INVOICE_STARTING_NUMBER: 5000
+  J2ME_ADDRESS: ''
+#  KAFKA_HOST:
+  #  PILLOWTOP_MACHINE_ID:
+  PILLOW_RETRY_QUEUE_ENABLED: True
+  REDIS_DB: '0'
+  REDIS_HOST: "localhost"
+  REDIS_PORT: '6379'
+  REMINDERS_QUEUE_ENABLED: False
+  SMS_GATEWAY_URL: 'http://gw1.promessaging.com/sms.php'
+  SMS_QUEUE_ENABLED: False
+#  STATIC_ROOT:
+  ENABLE_PRELOGIN_SITE: False
+  ENTERPRISE_MODE: True
+  RESTRICT_DOMAIN_CREATION: True
