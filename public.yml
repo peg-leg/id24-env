@@ -90,7 +90,7 @@ KSPLICE_ACTIVE: no
 DATADOG_ENABLED: false
 
 nameservers: []
-internal_domain_name: 'inddex24-2204.projectbalance.com'
+internal_domain_name: 'projectbalance.com'
 
 filebeat_inputs:
   - path: "{{ log_home }}/{{ deploy_env }}_commcare-nginx_error.log"
@@ -103,7 +103,7 @@ TWO_FACTOR_GATEWAY_ENABLED: False
 localsettings:
   ALLOWED_HOSTS:
     - 'localhost'
-    - 'inddex24-2204.projectbalance.com'
+    - 'inddex24.projectbalance.com'
   BANK_ADDRESS: ~
   BANK_NAME: ~
   BANK_SWIFT_CODE: ~
