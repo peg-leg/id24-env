@@ -1,4 +1,4 @@
-SITE_HOST: 'inddex24-2204.projectbalance.com'
+SITE_HOST: 'inddex24.projectbalance.com'
 
 special_sites: []
 fake_ssl_cert: True
